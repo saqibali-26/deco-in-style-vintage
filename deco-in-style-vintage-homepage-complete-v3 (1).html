@@ -1,0 +1,503 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Deco In Style Vintage — Vintage Glass, Ceramics & Curiosities</title>
+<meta name="description" content="A curated collection of vintage glass, ceramics and curiosities sourced from Somerset and beyond. Discover vintage pieces with character, craftsmanship and story.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@400;500;600&family=Italiana&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#141411;--paper:#fbf8f1;--cream:#f1ebdf;--sand:#e3d9c9;--line:#d7cec0;
+  --gold:#b69655;--gold2:#d0b574;--olive:#737563;--muted:#777166;--white:#fff;
+  --max:1320px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:"DM Sans",sans-serif;-webkit-font-smoothing:antialiased}
+a{text-decoration:none;color:inherit}
+button{font:inherit;color:inherit;border:0;background:none;cursor:pointer}
+img{display:block;width:100%;height:100%;object-fit:cover}
+.wrap{width:min(var(--max),calc(100% - 56px));margin-inline:auto}
+.eyebrow{font-size:9px;line-height:1;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);font-weight:600}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:45px;padding:0 20px;border:1px solid currentColor;font-size:9px;letter-spacing:.17em;text-transform:uppercase;transition:.3s ease}
+.btn.dark{background:var(--ink);color:#fff;border-color:var(--ink)}
+.btn:hover{background:var(--gold);border-color:var(--gold);color:var(--ink)}
+.viewall{font-size:9px;letter-spacing:.17em;text-transform:uppercase;border-bottom:1px solid currentColor;padding-bottom:5px;white-space:nowrap}
+
+/* announcement + navigation */
+.announcement{height:34px;background:var(--ink);color:#f3eee5;display:flex;align-items:center;justify-content:center;font-size:8px;letter-spacing:.22em;text-transform:uppercase}
+.announcement b{color:var(--gold2);font-weight:600}
+header{position:sticky;top:0;z-index:100;background:rgba(251,248,241,.96);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.nav{height:88px;display:grid;grid-template-columns:1fr auto 1fr;align-items:center}
+.nav-links{display:flex;gap:27px;align-items:center}
+.nav-links a,.nav-tools a{font-size:9px;letter-spacing:.18em;text-transform:uppercase;position:relative}
+.nav-links a:after,.nav-tools a:after{content:"";position:absolute;left:0;bottom:-8px;width:0;height:1px;background:var(--gold);transition:.3s}
+.nav-links a:hover:after,.nav-tools a:hover:after{width:100%}
+.brand{text-align:center;line-height:.78;position:relative}
+.brand-mark{position:absolute;left:50%;top:50%;width:37px;height:37px;border:1px solid var(--gold);transform:translate(-50%,-50%) rotate(45deg)}
+.brand-name,.brand-sub{position:relative;background:var(--paper);padding:0 9px}
+.brand-name{font:400 30px/1 Italiana,serif;letter-spacing:.02em}
+.brand-sub{display:block;margin-top:9px;font-size:8px;letter-spacing:.39em;text-transform:uppercase}
+.nav-tools{display:flex;justify-content:flex-end;gap:21px;align-items:center}
+.bag{border:1px solid var(--ink);padding:10px 12px}
+.menu-btn{display:none}.mobile-nav{display:none}
+
+/* hero */
+.hero{min-height:760px;display:grid;grid-template-columns:43% 57%;background:var(--paper)}
+.hero-copy{padding:92px 7vw 78px 8vw;display:flex;flex-direction:column;justify-content:center;position:relative;overflow:hidden}
+.hero-copy:before{content:"";position:absolute;width:480px;height:480px;border:1px solid rgba(182,150,85,.3);right:-325px;top:78px;transform:rotate(45deg)}
+.hero-copy:after{content:"";position:absolute;width:170px;height:1px;background:var(--gold);left:8vw;bottom:56px;opacity:.65}
+.hero h1{font:500 clamp(66px,7vw,112px)/.78 "Cormorant Garamond",serif;letter-spacing:-.05em;margin:23px 0 30px;max-width:630px}
+.hero h1 em{font-weight:400;color:var(--olive)}
+.hero-lead{font:400 22px/1.38 "Cormorant Garamond",serif;color:#514d45;max-width:500px;margin:0 0 34px}
+.hero-actions{display:flex;gap:10px;flex-wrap:wrap}
+.hero-meta{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:55px;padding-top:17px;border-top:1px solid var(--line);max-width:570px}
+.hero-meta span{font-size:8px;line-height:1.5;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.hero-meta strong{display:block;color:var(--ink);font-size:10px;margin-bottom:4px}
+.hero-media{position:relative;min-height:760px;overflow:hidden;background:#c8bfae}
+.hero-slide{position:absolute;inset:0;opacity:0;visibility:hidden;pointer-events:none;transition:opacity .65s ease}.hero-slide.active{opacity:1;visibility:visible;pointer-events:auto}
+.hero-slide img{filter:saturate(.78);transform:scale(1.01)}
+.hero-overlay{position:absolute;inset:0;z-index:2;background:linear-gradient(90deg,rgba(0,0,0,.24),transparent 52%),linear-gradient(0deg,rgba(0,0,0,.38),transparent 48%)}
+.hero-frame{position:absolute;inset:24px 24px 24px 0;border:1px solid rgba(255,255,255,.55);z-index:3;pointer-events:none}
+.hero-slide-caption{position:absolute;left:43px;bottom:39px;z-index:4;color:#fff;max-width:520px;overflow:hidden}.hero-slide-caption small{display:block;font-size:8px;line-height:1.2;letter-spacing:.2em;text-transform:uppercase}.hero-slide-caption h2{font:400 clamp(32px,3.4vw,49px)/.98 "Cormorant Garamond",serif;margin:8px 0 7px;letter-spacing:-.02em}.hero-slide-caption p{margin:0;font:400 17px/1.2 "Cormorant Garamond",serif;opacity:.9}.hero-slide:not(.active) .hero-slide-caption{visibility:hidden;opacity:0}.hero-slide.active .hero-slide-caption{visibility:visible;opacity:1}
+.hero-controls{position:absolute;right:35px;bottom:34px;z-index:5;display:flex;gap:7px}.hero-controls button{width:42px;height:42px;border:1px solid rgba(255,255,255,.7);color:#fff;transition:.25s}.hero-controls button:hover{background:#fff;color:var(--ink)}
+.hero-dots{position:absolute;right:39px;top:39px;z-index:5;display:flex;gap:8px}.hero-dots button{width:7px;height:7px;border:1px solid #fff;border-radius:50%;padding:0}.hero-dots button.active{background:#fff}
+
+/* ticker */
+.marquee{overflow:hidden;background:var(--gold);border-top:1px solid var(--ink);border-bottom:1px solid var(--ink);white-space:nowrap}.marquee-track{display:inline-flex;animation:ticker 25s linear infinite}.marquee:hover .marquee-track{animation-play-state:paused}.marquee span{padding:15px 28px;font:500 13px/1 "Cormorant Garamond",serif;letter-spacing:.12em;text-transform:uppercase}.marquee i{font-style:normal;opacity:.65}
+@keyframes ticker{to{transform:translateX(-50%)}}
+
+/* intro */
+.intro{padding:118px 0;background:var(--paper)}
+.intro-grid{display:grid;grid-template-columns:1fr 1.75fr;gap:85px;align-items:start}
+.intro h2{font:500 clamp(49px,5vw,76px)/.87 "Cormorant Garamond",serif;letter-spacing:-.04em;margin:15px 0 0;max-width:430px}
+.intro-copy{font:400 clamp(26px,2.4vw,35px)/1.24 "Cormorant Garamond",serif;color:#4d4941;max-width:800px}.intro-copy p{margin:0 0 23px}.intro-copy span{color:var(--olive)}
+.intro-note{display:flex;gap:25px;margin-top:34px;padding-top:18px;border-top:1px solid var(--line);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+
+/* shared section */
+.section{padding:108px 0}.section-head{display:flex;justify-content:space-between;align-items:end;gap:30px;margin-bottom:37px}.section-head h2{font:500 clamp(46px,5vw,74px)/.88 "Cormorant Garamond",serif;letter-spacing:-.04em;margin:13px 0 0}.dark-section{background:var(--ink);color:#fff}.dark-section .eyebrow{color:var(--gold2)}
+
+/* product slider */
+.shop{background:var(--ink);color:#fff}.product-slider{display:flex;gap:16px;overflow-x:auto;scrollbar-width:none;scroll-behavior:smooth;cursor:grab;padding-bottom:3px}.product-slider::-webkit-scrollbar{display:none}
+.product{flex:0 0 calc(25% - 12px);min-width:260px;background:#f8f5ee;color:var(--ink);overflow:hidden}.product-image{height:405px;position:relative;overflow:hidden;background:#d6cdbf}.product-image img{transition:transform .65s ease}.product:hover .product-image img{transform:scale(1.06)}
+.product-tag{position:absolute;left:13px;top:13px;z-index:2;background:rgba(251,248,241,.92);padding:8px 9px;font-size:7px;letter-spacing:.16em;text-transform:uppercase}
+.product-info{padding:19px}.product-maker{font-size:8px;letter-spacing:.18em;text-transform:uppercase;color:#817b70}.product h3{font:500 27px/1 "Cormorant Garamond",serif;margin:8px 0 17px}.product-foot{display:flex;justify-content:space-between;align-items:center;font-size:9px}.product-link{text-transform:uppercase;letter-spacing:.13em;opacity:.5;transition:.3s}.product:hover .product-link{opacity:1}.round-arrow{width:31px;height:31px;border:1px solid #cfc7b9;display:grid;place-items:center;transition:.25s}.product:hover .round-arrow{background:var(--ink);color:#fff}
+.slider-controls{display:flex;gap:7px}.slider-controls button{width:42px;height:42px;border:1px solid currentColor;transition:.25s}.slider-controls button:hover{background:var(--gold);border-color:var(--gold);color:var(--ink)}
+
+/* era section - robust layout */
+.era{background:var(--cream);padding:110px 0}.era-grid{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:20px;align-items:start}.era-main,.era-side{display:block;position:relative;overflow:hidden}.era-main{height:640px}.era-stack{display:flex;flex-direction:column;gap:20px;min-width:0}.era-side{height:310px;margin:0!important}.era-card img{transition:transform .8s ease}.era-card:hover img{transform:scale(1.05)}.era-card:after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(0,0,0,.68),transparent 58%);pointer-events:none}.era-copy{position:absolute;left:29px;bottom:28px;z-index:2;color:#fff}.era-copy small{font-size:8px;letter-spacing:.2em;text-transform:uppercase}.era-copy h3{font:400 49px/.95 "Cormorant Garamond",serif;margin:8px 0}.era-copy span{font-size:8px;letter-spacing:.16em;text-transform:uppercase;border-bottom:1px solid #fff;padding-bottom:4px}
+
+/* archive */
+.archive{background:var(--paper);padding:118px 0}.archive-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:80px;align-items:center}.archive-card{background:var(--ink);color:#fff;min-height:500px;padding:67px;position:relative;overflow:hidden}.archive-card:before,.archive-card:after{content:"";position:absolute;width:230px;height:230px;border:1px solid rgba(183,149,75,.55);transform:rotate(45deg)}.archive-card:before{right:-126px;top:-111px}.archive-card:after{left:-130px;bottom:-121px}.archive-card h2{font:400 65px/.88 "Cormorant Garamond",serif;letter-spacing:-.035em;max-width:560px;margin:18px 0}.archive-card p{font:400 20px/1.42 "Cormorant Garamond",serif;color:#d4d0c8;max-width:500px;margin:0 0 30px}.makers{border-top:1px solid var(--line)}.maker-row{display:flex;justify-content:space-between;gap:20px;align-items:center;padding:17px 0;border-bottom:1px solid var(--line);font:400 25px/1 "Cormorant Garamond",serif;transition:.25s}.maker-row span{font:8px/1.2 "DM Sans",sans-serif;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}.maker-row:hover{padding-left:10px;color:var(--gold)}
+
+/* journal */
+.journal{background:#e8e0d2}.journal-slider{display:flex;gap:16px;overflow-x:auto;scrollbar-width:none;scroll-behavior:smooth;cursor:grab}.journal-slider::-webkit-scrollbar{display:none}.story-card{flex:0 0 calc(33.333% - 11px);min-width:290px;background:var(--paper);overflow:hidden}.story-img{height:335px;background:#c7beae;overflow:hidden}.story-img img{transition:.7s}.story-card:hover img{transform:scale(1.05)}.story-body{padding:22px}.story-body small{font-size:8px;letter-spacing:.17em;text-transform:uppercase;color:var(--muted)}.story-body h3{font:500 31px/1.02 "Cormorant Garamond",serif;margin:10px 0 23px}.story-body a{font-size:8px;letter-spacing:.16em;text-transform:uppercase;border-bottom:1px solid currentColor;padding-bottom:4px}
+
+/* reviews */
+.reviews{padding:108px 0;background:var(--paper)}.review-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.review-card{border-top:1px solid var(--ink);padding:24px 5px 0;min-height:210px}.stars{letter-spacing:.2em;font-size:11px;color:var(--gold);margin-bottom:22px}.review-card h3{font:400 29px/1.05 "Cormorant Garamond",serif;margin:0 0 18px}.review-card p{font-size:11px;line-height:1.65;color:var(--muted);margin:0}.review-link{margin-top:30px}
+
+/* instagram */
+.instagram{padding:112px 0;background:#e4dbcc}.ig-head{display:flex;justify-content:space-between;align-items:end;gap:30px;margin-bottom:35px}.ig-head h2{font:500 clamp(50px,5vw,70px)/.88 "Cormorant Garamond",serif;letter-spacing:-.04em;margin:13px 0 0}.ig-grid{display:grid;grid-template-columns:1.2fr .8fr .8fr 1.2fr;gap:12px}.ig{height:420px;position:relative;overflow:hidden;background:#c6bcab}.ig:nth-child(2),.ig:nth-child(3){height:330px;margin-top:45px}.ig img{transition:.7s}.ig:hover img{transform:scale(1.05)}.ig:after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(0,0,0,.3),transparent 55%);pointer-events:none}.ig-label{position:absolute;left:16px;bottom:16px;z-index:2;color:#fff;font-size:8px;letter-spacing:.16em;text-transform:uppercase}
+
+/* CTA + footer */
+.final-cta{background:var(--ink);color:#fff;padding:105px 0}.final-inner{display:flex;align-items:end;justify-content:space-between;gap:50px}.final-inner h2{font:400 clamp(55px,7vw,95px)/.8 "Cormorant Garamond",serif;letter-spacing:-.045em;max-width:760px;margin:15px 0 0}.final-inner .btn{margin-bottom:4px}
+footer{background:#0d0d0b;color:#ddd8ce;padding:68px 0 0}.footer-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:45px;padding-bottom:60px}.footer-logo{font:400 28px Italiana,serif;color:#fff}.footer-desc{max-width:330px;font:400 19px/1.35 "Cormorant Garamond",serif;color:#a9a49a;margin-top:15px}.footer-grid h4{font-size:8px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold2);margin:4px 0 18px}.footer-grid a{display:block;font-size:10px;color:#b8b2a8;margin:0 0 11px}.footer-grid a:hover{color:#fff}.bottom{border-top:1px solid #2d2c28;padding:18px 0 25px;display:flex;justify-content:space-between;gap:20px;font-size:8px;letter-spacing:.13em;text-transform:uppercase;color:#77736b}
+
+/* image fallback */
+.media-fallback{background:linear-gradient(135deg,#d9d0c0,#8d8879)!important}
+
+@media(max-width:1080px){
+  .hero{grid-template-columns:1fr}.hero-copy{min-height:570px;padding:90px 8vw}.hero-media{min-height:650px}.product{flex-basis:calc(33.333% - 11px)}.archive-grid{gap:45px}.archive-card{padding:52px}.archive-card h2{font-size:57px}.ig-grid{grid-template-columns:1fr 1fr}.ig:nth-child(2),.ig:nth-child(3){height:420px;margin-top:0}
+}
+@media(max-width:900px){
+  .mobile-nav{display:none;position:absolute;left:0;right:0;top:74px;background:var(--paper);border-bottom:1px solid var(--line);padding:12px 16px}.mobile-nav.show{display:grid;grid-template-columns:1fr 1fr;gap:0}.mobile-nav a{padding:14px 0;font-size:8px;letter-spacing:.16em;text-transform:uppercase;border-bottom:1px solid var(--line)}
+  .nav{height:74px}.nav-links{display:none}.menu-btn{display:block;font-size:9px;letter-spacing:.15em;text-transform:uppercase}.nav-tools a{display:none}.brand-name{font-size:26px}.brand-sub{font-size:7px}
+  .intro-grid,.archive-grid{grid-template-columns:1fr;gap:42px}.intro-copy{max-width:760px}.archive-grid{align-items:stretch}.archive-card{min-height:auto}
+  .era-grid{grid-template-columns:1fr;gap:16px}.era-main{height:540px}.era-stack{display:grid;grid-template-columns:1fr 1fr;gap:16px}.era-side{height:330px}
+  .review-grid{grid-template-columns:1fr}.review-card{min-height:auto;padding-bottom:20px}.footer-grid{grid-template-columns:1.5fr 1fr 1fr}.footer-grid>div:last-child{grid-column:auto}
+}
+@media(max-width:680px){
+  .wrap{width:min(100% - 32px,var(--max))}.announcement{font-size:7px;letter-spacing:.16em}.hero-copy{min-height:510px;padding:76px 16px 65px}.hero h1{font-size:68px}.hero-lead{font-size:20px}.hero-meta{gap:10px;margin-top:42px}.hero-media{min-height:530px}.hero-frame{inset:16px}.hero-slide-caption{left:27px;right:22px;bottom:28px}.hero-slide-caption h2{font-size:34px}.hero-controls{right:25px;bottom:25px}.hero-dots{right:27px;top:28px}
+  .intro,.section,.era,.archive,.reviews,.instagram{padding:78px 0}.intro-grid{gap:30px}.intro-copy{font-size:27px}.intro-note{display:block}.intro-note div{margin-bottom:10px}
+  .section-head{align-items:start;flex-direction:column;gap:18px}.section-head h2{font-size:52px}.product{flex-basis:78vw}.product-image{height:350px}.story-card{flex-basis:82vw}.story-img{height:300px}
+  .era-grid{display:block}.era-main{height:390px;margin-bottom:12px}.era-stack{display:block}.era-side{height:270px;margin-bottom:12px!important}.era-copy{left:22px;bottom:22px}.era-copy h3{font-size:40px}
+  .archive-card{padding:43px 28px}.archive-card h2{font-size:52px}.maker-row{font-size:22px}
+  .ig-grid{grid-template-columns:1fr 1fr;gap:8px}.ig{height:270px}.ig:nth-child(2),.ig:nth-child(3){height:270px}.ig:nth-child(4){height:270px}.ig-label{font-size:7px}
+  .final-cta{padding:78px 0}.final-inner{display:block}.final-inner h2{font-size:66px;margin-bottom:35px}.footer-grid{grid-template-columns:1fr 1fr;gap:35px}.footer-grid>div:first-child{grid-column:1/-1}.bottom{display:block}.bottom div+div{margin-top:8px}
+}
+@media(max-width:430px){.hero h1{font-size:61px}.hero-meta{grid-template-columns:1fr 1fr}.hero-meta div:last-child{grid-column:1/-1}.product{flex-basis:88vw}.ig-grid{grid-template-columns:1fr}.ig,.ig:nth-child(2),.ig:nth-child(3),.ig:nth-child(4){height:330px}.footer-grid{grid-template-columns:1fr}}
+
+/* ===== PREMIUM CRO REFINEMENT ===== */
+:root{--max:1380px;--ink:#11110f;--paper:#fbf9f4;--cream:#eee7da;--gold:#ad8a4b;--olive:#747664;--line:#d9d1c4}
+body{background:var(--paper)}
+.wrap{width:min(var(--max),calc(100% - 72px))}
+header{box-shadow:0 1px 0 rgba(17,17,15,.04)}
+.nav{height:82px}
+.brand-name{font-size:32px}
+
+.hero{min-height:760px;grid-template-columns:minmax(0,1.04fr) minmax(430px,.96fr);border-bottom:1px solid var(--line)}
+.hero-copy{padding:86px clamp(42px,6vw,110px) 70px clamp(42px,7vw,118px);justify-content:center}
+.hero-copy:before{width:520px;height:520px;right:-355px;top:45px;opacity:.7}
+.hero-copy:after{left:clamp(42px,7vw,118px);bottom:43px;width:115px}
+.hero h1{font-size:clamp(67px,6.5vw,108px);line-height:.79;max-width:680px;margin:20px 0 30px;letter-spacing:-.055em}
+.hero-lead{font-size:23px;line-height:1.32;max-width:590px;margin-bottom:30px}
+.hero-actions{gap:9px}
+.hero-actions .btn{min-width:164px}
+.hero-meta{max-width:630px;margin-top:45px;gap:0}
+.hero-meta div{padding-right:18px;border-right:1px solid var(--line)}
+.hero-meta div+div{padding-left:18px}
+.hero-meta div:last-child{border-right:0}
+.hero-media{min-height:760px}
+.hero-slide-caption{left:38px;right:38px;bottom:38px;max-width:560px}
+.hero-slide-caption h2{font-size:clamp(36px,3.2vw,54px);line-height:.92}
+.hero-slide-caption p{font-size:18px}
+
+/* conversion reassurance strip */
+.cro-strip{background:#151512;color:#f8f4eb;border-bottom:1px solid #272722}
+.cro-strip .wrap{display:grid;grid-template-columns:repeat(4,1fr)}
+.cro-point{min-height:78px;padding:17px 24px;display:flex;align-items:center;gap:12px;border-right:1px solid #34332e}
+.cro-point:first-child{padding-left:0}
+.cro-point:last-child{border-right:0}
+.cro-point b{font:500 20px/1 "Cormorant Garamond",serif;color:#fff}
+.cro-point span{display:block;font-size:8px;line-height:1.45;letter-spacing:.13em;text-transform:uppercase;color:#aaa59b;margin-top:3px}
+
+.intro{padding:125px 0 112px}
+.intro-grid{grid-template-columns:minmax(280px,.72fr) minmax(0,1.65fr);gap:100px}
+.intro h2{font-size:clamp(54px,5vw,82px)}
+.intro-copy{font-size:clamp(27px,2.25vw,35px);line-height:1.2}
+.intro-copy p{max-width:900px}
+
+.section{padding:105px 0}
+.dark-section{background:#11110f;color:#f8f4eb}
+.dark-section .eyebrow{color:var(--gold2)}
+.dark-section .section-head h2{color:#fff}
+.section-head{margin-bottom:38px}
+.section-head h2{font-size:clamp(47px,4.8vw,70px);letter-spacing:-.045em}
+.slider-controls button{width:45px;height:45px}
+.product-slider{gap:14px}
+.product{flex-basis:calc(25% - 11px);background:#191916;color:#f8f5ee}
+.product h3{color:#f8f5ee}
+.product-maker{color:#b8b1a5}
+.product-link{color:#f8f5ee}
+.product .round-arrow{color:#f8f5ee;border-color:#625e56}
+.product-image{height:390px}
+.product-info{padding:19px 18px 20px}
+.product h3{font-size:30px}
+.product-link{font-size:8px}
+.product:hover{transform:translateY(-4px)}
+
+/* shop category cards */
+.category-intro{display:flex;justify-content:space-between;gap:35px;align-items:end;margin-bottom:34px}
+.category-intro h2{font:500 clamp(48px,5vw,70px)/.88 "Cormorant Garamond",serif;letter-spacing:-.04em;margin:13px 0 0}
+.category-grid{display:grid;grid-template-columns:1.4fr .8fr .8fr;gap:14px}
+.category-card{position:relative;height:510px;overflow:hidden;background:#c9c0b0}
+.category-card:nth-child(2),.category-card:nth-child(3){height:510px}
+.category-card img{transition:transform .9s cubic-bezier(.2,.7,.2,1)}
+.category-card:hover img{transform:scale(1.045)}
+.category-card:after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(0,0,0,.72),transparent 60%)}
+.category-copy{position:absolute;z-index:2;left:27px;right:20px;bottom:25px;color:#fff}
+.category-copy small{font-size:8px;letter-spacing:.18em;text-transform:uppercase}
+.category-copy h3{font:400 43px/.92 "Cormorant Garamond",serif;margin:8px 0 14px}
+.category-copy span{font-size:8px;letter-spacing:.16em;text-transform:uppercase;border-bottom:1px solid #fff;padding-bottom:5px}
+
+.era{padding:108px 0;background:var(--cream)}
+.era-grid{gap:14px}
+.era-main{height:675px}.era-stack{gap:14px}.era-side{height:330px}
+.era-copy h3{font-size:52px}
+
+.archive{padding:125px 0}
+.archive-grid{grid-template-columns:1.12fr .88fr;gap:90px}
+.archive-card{min-height:540px;padding:70px}
+.archive-card h2{font-size:clamp(58px,5vw,78px)}
+.archive-card p{font-size:21px}
+.maker-row{padding:20px 0;font-size:27px}
+
+/* collector guidance / CRO */
+.collector{padding:118px 0;background:#f3eee5}
+.collector-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:100px;align-items:center}
+.collector h2{font:500 clamp(53px,5vw,78px)/.88 "Cormorant Garamond",serif;letter-spacing:-.045em;margin:14px 0 24px}
+.collector-lead{font:400 25px/1.28 "Cormorant Garamond",serif;color:#504c44;max-width:520px}
+.collector-list{border-top:1px solid var(--line)}
+.collector-item{display:grid;grid-template-columns:38px 1fr auto;gap:16px;align-items:center;padding:21px 0;border-bottom:1px solid var(--line)}
+.collector-item b{font:400 25px/1 "Cormorant Garamond",serif}
+.collector-item span{font-size:8px;line-height:1.45;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.collector-num{font-size:8px;letter-spacing:.12em;color:var(--gold)}
+
+.journal{background:#e8e0d2;padding:110px 0}
+.story-card{flex-basis:calc(33.333% - 11px);transition:transform .3s ease,box-shadow .3s ease}
+.story-card:hover{transform:translateY(-5px);box-shadow:0 18px 35px rgba(35,31,25,.1)}
+.story-img{height:350px}
+
+/* real-review CTA: don't fabricate customer quotes */
+.reviews{padding:112px 0;background:var(--paper)}
+.review-grid{display:grid;grid-template-columns:1.35fr .65fr;gap:16px}
+.review-card{min-height:300px;padding:48px;background:#eee7da;position:relative;overflow:hidden}
+.review-card.dark-review{background:#11110f;color:#fff}
+.review-card h3{font:400 clamp(38px,4vw,56px)/.92 "Cormorant Garamond",serif;margin:12px 0 20px;max-width:680px}
+.review-card p{font:400 20px/1.4 "Cormorant Garamond",serif;color:#5c574f;max-width:600px}
+.dark-review p{color:#bcb7ad}
+.review-platforms{display:flex;gap:12px;flex-wrap:wrap;margin-top:25px}
+.review-platform{border:1px solid currentColor;padding:12px 15px;font-size:8px;letter-spacing:.15em;text-transform:uppercase}
+.review-platform:hover{background:var(--gold);border-color:var(--gold);color:var(--ink)}
+
+.instagram{padding:115px 0;background:#e4dbcc}
+.ig{height:450px}.ig:nth-child(2),.ig:nth-child(3){height:360px;margin-top:45px}
+
+.final-cta{padding:105px 0;background:var(--gold)}
+.final-inner{display:flex;justify-content:space-between;align-items:end;gap:45px}
+.final-inner h2{font-size:clamp(55px,6vw,86px);max-width:760px}
+.final-cta .btn{background:#11110f;color:#fff;border-color:#11110f;min-width:190px}
+.final-cta .btn:hover{background:#fff;color:#11110f;border-color:#fff}
+
+footer{padding-top:75px}
+
+@media(max-width:980px){
+  .wrap{width:min(var(--max),calc(100% - 42px))}
+  .hero{grid-template-columns:1fr}
+  .hero-copy{min-height:650px;padding:90px 7vw 70px}
+  .hero-media{min-height:650px}
+  .cro-strip .wrap{grid-template-columns:1fr 1fr}
+  .cro-point:nth-child(2){border-right:0}.cro-point:nth-child(3),.cro-point:nth-child(4){border-top:1px solid #34332e}
+  .category-grid{grid-template-columns:1fr 1fr}.category-card{height:430px}.category-card:first-child{grid-column:1/-1;height:520px}
+  .collector-grid{grid-template-columns:1fr;gap:50px}
+  .review-grid{grid-template-columns:1fr}
+  .product{flex-basis:calc(33.333% - 10px)}
+}
+@media(max-width:620px){
+  .wrap{width:calc(100% - 32px)}
+  .hero-copy{min-height:575px;padding:74px 16px 60px}
+  .hero h1{font-size:64px;line-height:.8;margin-top:17px}
+  .hero-lead{font-size:20px;max-width:520px}
+  .hero-meta{grid-template-columns:1fr 1fr;margin-top:38px}.hero-meta div{border-right:0;padding:0!important}.hero-meta div:last-child{grid-column:1/-1;margin-top:13px;padding-top:13px!important;border-top:1px solid var(--line)}
+  .hero-media{min-height:500px}.hero-frame{inset:14px}.hero-slide-caption{left:23px;right:23px;bottom:24px}.hero-slide-caption h2{font-size:35px}.hero-slide-caption p{font-size:16px}
+  .cro-strip .wrap{grid-template-columns:1fr}.cro-point{min-height:64px;border-right:0!important;border-top:1px solid #34332e}.cro-point:first-child{border-top:0;padding-left:0}
+  .intro,.section,.era,.archive,.collector,.reviews,.instagram{padding:78px 0}
+  .intro-grid{gap:35px}.intro-copy{font-size:26px}
+  .category-intro{display:block}.category-grid{grid-template-columns:1fr}.category-card,.category-card:first-child{height:390px;grid-column:auto}
+  .era-grid{display:block}.era-main{height:390px;margin-bottom:12px}.era-stack{display:block}.era-side{height:270px;margin-bottom:12px!important}
+  .archive-grid{gap:42px}.archive-card{padding:42px 30px}.archive-card h2{font-size:56px}
+  .collector-item{grid-template-columns:28px 1fr}.collector-item span{grid-column:2}.collector-item .collector-arrow{display:none}
+  .product{flex-basis:84vw}.product-image{height:360px}
+  .story-card{flex-basis:84vw}.story-img{height:330px}
+  .ig-grid{grid-template-columns:1fr}.ig,.ig:nth-child(2),.ig:nth-child(3),.ig:nth-child(4){height:330px;margin-top:0}
+  .final-inner{display:block}.final-inner h2{font-size:63px;margin-bottom:32px}
+}
+
+</style>
+</head>
+<body>
+<div class="announcement">Curated vintage glass, ceramics & curiosities · <b>Sourced from Somerset & beyond</b></div>
+
+<header>
+  <div class="wrap nav">
+    <button class="menu-btn" type="button" onclick="document.body.classList.toggle('menu-open')">Menu</button>
+    <nav class="nav-links" aria-label="Primary navigation">
+      <a href="#shop">Shop</a><a href="#eras">Collections</a><a href="#archive">Archive</a><a href="#journal">Journal</a>
+    </nav>
+    <a class="brand" href="https://decoinstylevintage.co.uk/" aria-label="Deco In Style Vintage home">
+      <span class="brand-mark"></span><span class="brand-name">DECO IN STYLE</span><span class="brand-sub">Vintage</span>
+    </a>
+    <div class="nav-tools"><a href="https://decoinstylevintage.co.uk/glossary">Glossary</a><a href="https://www.instagram.com/" target="_blank" rel="noopener">Instagram</a><a class="bag" href="https://decoinstylevintage.co.uk/ols/products">Shop all</a></div>
+  </div>
+  <div class="mobile-nav">
+    <a href="#shop">Shop</a><a href="#eras">Collections</a><a href="#archive">Archive</a><a href="#journal">Journal</a><a href="https://decoinstylevintage.co.uk/glossary">Glossary</a>
+  </div>
+</header>
+
+<main>
+<section class="hero" id="top">
+  <div class="hero-copy">
+    <div class="eyebrow">Vintage objects · Somerset · West Country</div>
+    <h1>Objects with <em>story.</em></h1>
+    <p class="hero-lead">A considered collection of vintage glass, ceramics and decorative treasures — chosen for character, craftsmanship and quiet beauty.</p>
+    <div class="hero-actions"><a class="btn dark" href="https://decoinstylevintage.co.uk/ols/products">Shop latest finds</a><a class="btn" href="#archive">Explore the archive</a></div>
+    <div class="hero-meta"><div><strong>Curated</strong>Not mass produced</div><div><strong>West Country</strong>Sourced locally & beyond</div><div><strong>Changing daily</strong>New finds added often</div></div>
+  </div>
+  <div class="hero-media" id="heroMedia">
+    <div class="hero-slide active">
+      <img src="https://img1.wsimg.com/isteam/ip/63e884dd-c920-42e4-aa42-12922a3278a0/Bagley3169TulipPosyBowlLgGreen.jpg/:/rs=w:1800,h:1800" alt="Green Art Deco glass bowl">
+      <div class="hero-slide-caption"><small>Bagley & Co. · Tulip</small><h2>A piece of design history.</h2><p>Art Deco glass with character.</p></div>
+    </div>
+    <div class="hero-slide">
+      <img src="https://img1.wsimg.com/isteam/ip/63e884dd-c920-42e4-aa42-12922a3278a0/20240304_111908.jpg/:/rs=w:1800,h:1800" alt="Vintage glass collection">
+      <div class="hero-slide-caption"><small>Vintage glass · Collected</small><h2>Objects made to be noticed.</h2><p>Colour, form and craftsmanship.</p></div>
+    </div>
+    <div class="hero-slide">
+      <img src="https://img1.wsimg.com/isteam/ip/63e884dd-c920-42e4-aa42-12922a3278a0/20240207_105943_001-b9890f5.jpg/:/rs=w:1800,h:1800" alt="Vintage ceramic and decorative pieces">
+      <div class="hero-slide-caption"><small>Vintage · Decorative</small><h2>The details make the piece.</h2><p>Curiosities for rooms with soul.</p></div>
+    </div>
+    <div class="hero-overlay"></div><div class="hero-frame"></div>
+    <div class="hero-dots"><button class="active" data-slide="0" aria-label="Slide 1"></button><button data-slide="1" aria-label="Slide 2"></button><button data-slide="2" aria-label="Slide 3"></button></div>
+    <div class="hero-controls"><button id="heroPrev" aria-label="Previous slide">←</button><button id="heroNext" aria-label="Next slide">→</button></div>
+  </div>
+</section>
+
+<div class="marquee"><div class="marquee-track"><span>Vintage glass <i>✦</i></span><span>Art Deco <i>✦</i></span><span>Somerset finds <i>✦</i></span><span>Ceramics <i>✦</i></span><span>Curiosities <i>✦</i></span><span>Objects with story <i>✦</i></span><span>Vintage glass <i>✦</i></span><span>Art Deco <i>✦</i></span><span>Somerset finds <i>✦</i></span><span>Ceramics <i>✦</i></span><span>Curiosities <i>✦</i></span><span>Objects with story <i>✦</i></span></div></div>
+<div class="cro-strip"><div class="wrap">
+  <div class="cro-point"><div><b>Curated, not crowded</b><span>Chosen for character & craftsmanship</span></div></div>
+  <div class="cro-point"><div><b>Somerset sourced</b><span>Thoughtfully gathered across the West Country</span></div></div>
+  <div class="cro-point"><div><b>One changing collection</b><span>New vintage pieces added regularly</span></div></div>
+  <div class="cro-point"><div><b>Research-led</b><span>Explore makers, dates & design history</span></div></div>
+</div></div>
+
+<section class="intro">
+  <div class="wrap intro-grid">
+    <div><div class="eyebrow">The collection</div><h2>Not just old.<br><em>Worth keeping.</em></h2></div>
+    <div class="intro-copy">
+      <p>At Deco In Style Vintage, each piece is selected for its <span>character, craftsmanship and quiet beauty</span> — from pressed glass and mid-century makers to cottage-core ceramics and timeless tableware.</p>
+      <p>Pieces are thoughtfully gathered from local markets, charity shops and car boot finds across Somerset and the West Country.</p>
+      <div class="intro-note"><div>01 · Character over quantity</div><div>02 · A changing collection</div><div>03 · Every piece has a past</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="section shop dark-section" id="shop">
+  <div class="wrap">
+    <div class="section-head"><div><div class="eyebrow">Latest finds</div><h2>Discover the collection.</h2></div><div class="slider-controls"><button data-scroll="productSlider" data-dir="-1" aria-label="Previous products">←</button><button data-scroll="productSlider" data-dir="1" aria-label="Next products">→</button></div></div>
+    <div class="product-slider" id="productSlider">
+      <article class="product"><div class="product-image"><span class="product-tag">Latest find</span><img src="https://img1.wsimg.com/isteam/ip/63e884dd-c920-42e4-aa42-12922a3278a0/Bagley3169TulipPosyBowlLgGreen.jpg/:/rs=w:1200,h:1200" alt="Green Bagley Art Deco glass bowl"></div><div class="product-info"><div class="product-maker">Bagley & Co. · British glass</div><h3>Tulip Posy Bowl</h3><div class="product-foot"><span class="product-link">View piece</span><span class="round-arrow">↗</span></div></div></article>
+      <article class="product"><div class="product-image"><span class="product-tag">Vintage glass</span><img src="https://img1.wsimg.com/isteam/ip/63e884dd-c920-42e4-aa42-12922a3278a0/20240304_111908.jpg/:/rs=w:1200,h:1200" alt="Vintage glass"></div><div class="product-info"><div class="product-maker">Curated vintage</div><h3>Collected Glass</h3><div class="product-foot"><span class="product-link">View piece</span><span class="round-arrow">↗</span></div></div></article>
+      <article class="product"><div class="product-image"><span class="product-tag">Ceramics</span><img src="https://img1.wsimg.com/isteam/ip/63e884dd-c920-42e4-aa42-12922a3278a0/20240207_105943_001-b9890f5.jpg/:/rs=w:1200,h:1200" alt="Vintage ceramic homeware"></div><div class="product-info"><div class="product-maker">Vintage · decorative</div><h3>Everyday Beauty</h3><div class="product-foot"><span class="product-link">View piece</span><span class="round-arrow">↗</span></div></div></article>
+      <article class="product"><div class="product-image"><span class="product-tag">Curiosity</span><img src="https://img1.wsimg.com/isteam/ip/63e884dd-c920-42e4-aa42-12922a3278a0/20230918_113438.jpg/:/rs=w:1200,h:1200" alt="Vintage dressing table set"></div><div class="product-info"><div class="product-maker">Vintage · dressing table</div><h3>Collected Detail</h3><div class="product-foot"><span class="product-link">View piece</span><span class="round-arrow">↗</span></div></div></article>
+      <article class="product"><div class="product-image"><span class="product-tag">Art Deco</span><img src="https://img1.wsimg.com/isteam/ip/63e884dd-c920-42e4-aa42-12922a3278a0/Bagley3169TulipPosyBowlLgGreen.jpg/:/rs=w:1200,h:1200" alt="Art Deco glass"></div><div class="product-info"><div class="product-maker">1920s–30s · geometric</div><h3>Statement Glass</h3><div class="product-foot"><span class="product-link">View piece</span><span class="round-arrow">↗</span></div></div></article>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="collections">
+  <div class="wrap">
+    <div class="category-intro"><div><div class="eyebrow">Shop by collection</div><h2>Start with what catches your eye.</h2></div><a class="viewall" href="https://decoinstylevintage.co.uk/ols/products">View all pieces →</a></div>
+    <div class="category-grid">
+      <a class="category-card" href="https://decoinstylevintage.co.uk/ols/products"><img src="https://img1.wsimg.com/isteam/ip/63e884dd-c920-42e4-aa42-12922a3278a0/Bagley3169TulipPosyBowlLgGreen.jpg/:/rs=w:1600,h:1600" alt="Art Deco vintage glass"><div class="category-copy"><small>1920s–30s · geometric · statement</small><h3>Art Deco Glass</h3><span>Explore the collection →</span></div></a>
+      <a class="category-card" href="https://decoinstylevintage.co.uk/ols/products"><img src="https://img1.wsimg.com/isteam/ip/63e884dd-c920-42e4-aa42-12922a3278a0/20240304_111908.jpg/:/rs=w:1400,h:1400" alt="Vintage glass"><div class="category-copy"><small>Colour · form · craft</small><h3>Vintage Glass</h3><span>Shop glass →</span></div></a>
+      <a class="category-card" href="https://decoinstylevintage.co.uk/ols/products"><img src="https://img1.wsimg.com/isteam/ip/63e884dd-c920-42e4-aa42-12922a3278a0/20240207_105943_001-b9890f5.jpg/:/rs=w:1400,h:1400" alt="Vintage ceramics and decorative homeware"><div class="category-copy"><small>Everyday beauty · decorative</small><h3>Ceramics</h3><span>Shop ceramics →</span></div></a>
+    </div>
+  </div>
+</section>
+
+<section class="era" id="eras">
+  <div class="wrap">
+    <div class="section-head"><div><div class="eyebrow">Shop by character</div><h2>Find your era.</h2></div><a class="viewall" href="https://decoinstylevintage.co.uk/ols/products">View all pieces →</a></div>
+    <div class="era-grid">
+      <a class="era-card era-main" href="https://decoinstylevintage.co.uk/ols/products"><img src="https://img1.wsimg.com/isteam/ip/63e884dd-c920-42e4-aa42-12922a3278a0/Bagley3169TulipPosyBowlLgGreen.jpg/:/rs=w:1600,h:1600" alt="Art Deco green glass"><div class="era-copy"><small>01 · geometric · 1920s–30s</small><h3>Art Deco</h3><span>Explore the era →</span></div></a>
+      <div class="era-stack">
+        <a class="era-card era-side" href="https://decoinstylevintage.co.uk/ols/products"><img src="https://img1.wsimg.com/isteam/ip/63e884dd-c920-42e4-aa42-12922a3278a0/20240304_111908.jpg/:/rs=w:1400,h:1400" alt="Vintage glass collection"><div class="era-copy"><small>02 · colour · craft</small><h3>Vintage Glass</h3><span>Shop pieces →</span></div></a>
+        <a class="era-card era-side" href="https://decoinstylevintage.co.uk/ols/products"><img src="https://img1.wsimg.com/isteam/ip/63e884dd-c920-42e4-aa42-12922a3278a0/20240207_105943_001-b9890f5.jpg/:/rs=w:1400,h:1400" alt="Vintage ceramics"><div class="era-copy"><small>03 · everyday beauty</small><h3>Ceramics</h3><span>Shop pieces →</span></div></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="archive" id="archive">
+  <div class="wrap archive-grid">
+    <div class="archive-card"><div class="eyebrow">The collector's archive</div><h2>Know what you're looking at.</h2><p>Explore makers, patterns, dates, measurements and design history behind the pieces. The glossary turns browsing into discovery.</p><a class="btn" href="https://decoinstylevintage.co.uk/glossary">Browse the glossary →</a></div>
+    <div><div class="eyebrow">Featured makers</div><h2 style="font:500 55px/.9 'Cormorant Garamond',serif;margin:14px 0 30px">A little history goes a long way.</h2><div class="makers">
+      <div class="maker-row">Bagley & Co. <span>British glass</span></div><div class="maker-row">Davidson <span>British glass</span></div><div class="maker-row">Sowerby <span>British glass</span></div><div class="maker-row">Dartington <span>North Devon</span></div><div class="maker-row">Libochovice <span>Czech glass</span></div><div class="maker-row">Brockwitz <span>Saxony</span></div>
+    </div></div>
+  </div>
+</section>
+
+<section class="collector">
+  <div class="wrap collector-grid">
+    <div><div class="eyebrow">Buy with curiosity</div><h2>Every piece has more to tell.</h2><p class="collector-lead">Vintage is part of the experience. Explore the maker, period, details and story before you decide what belongs in your home.</p><a class="btn dark" href="https://decoinstylevintage.co.uk/glossary">Explore the collector's archive →</a></div>
+    <div class="collector-list">
+      <div class="collector-item"><div class="collector-num">01</div><div><b>Identify the maker</b><span>Discover names such as Bagley & Co., Davidson, Sowerby and Dartington.</span></div><div class="collector-arrow">↗</div></div>
+      <div class="collector-item"><div class="collector-num">02</div><div><b>Understand the era</b><span>From Art Deco geometry to mid-century colour and form.</span></div><div class="collector-arrow">↗</div></div>
+      <div class="collector-item"><div class="collector-num">03</div><div><b>Notice the details</b><span>Patterns, measurements, colour, texture and craftsmanship matter.</span></div><div class="collector-arrow">↗</div></div>
+      <div class="collector-item"><div class="collector-num">04</div><div><b>Choose what speaks to you</b><span>A changing selection of objects for collectors and characterful homes.</span></div><div class="collector-arrow">↗</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="section journal" id="journal">
+  <div class="wrap"><div class="section-head"><div><div class="eyebrow">The journal</div><h2>Stories worth keeping.</h2></div><div class="slider-controls"><button data-scroll="journalSlider" data-dir="-1" aria-label="Previous journal stories">←</button><button data-scroll="journalSlider" data-dir="1" aria-label="Next journal stories">→</button></div></div>
+    <div class="journal-slider" id="journalSlider">
+      <article class="story-card"><div class="story-img"><img src="https://img1.wsimg.com/isteam/ip/63e884dd-c920-42e4-aa42-12922a3278a0/Bagley3169TulipPosyBowlLgGreen.jpg/:/rs=w:1400,h:1400" alt="Vintage glass bowl"></div><div class="story-body"><small>Design history</small><h3>Sowerby Glass: A Century of Craft and Innovation</h3><a href="https://decoinstylevintage.co.uk/blog">Read story →</a></div></article>
+      <article class="story-card"><div class="story-img"><img src="https://img1.wsimg.com/isteam/ip/63e884dd-c920-42e4-aa42-12922a3278a0/20240304_111908.jpg/:/rs=w:1400,h:1400" alt="Vintage glass collection"></div><div class="story-body"><small>Collecting</small><h3>Libochovice Glass: A Legacy of Czech Craftsmanship</h3><a href="https://decoinstylevintage.co.uk/blog">Read story →</a></div></article>
+      <article class="story-card"><div class="story-img"><img src="https://img1.wsimg.com/isteam/ip/63e884dd-c920-42e4-aa42-12922a3278a0/20240207_105943_001-b9890f5.jpg/:/rs=w:1400,h:1400" alt="Vintage homeware"></div><div class="story-body"><small>Glass & home</small><h3>How the right vintage piece changes a room</h3><a href="https://decoinstylevintage.co.uk/blog">Read the journal →</a></div></article>
+      <article class="story-card"><div class="story-img"><img src="https://img1.wsimg.com/isteam/ip/63e884dd-c920-42e4-aa42-12922a3278a0/20230918_113438.jpg/:/rs=w:1400,h:1400" alt="Vintage dressing table pieces"></div><div class="story-body"><small>Collecting</small><h3>What makes a vintage find worth keeping?</h3><a href="https://decoinstylevintage.co.uk/blog">Read the journal →</a></div></article>
+    </div>
+  </div>
+</section>
+
+<section class="reviews">
+  <div class="wrap">
+    <div class="section-head"><div><div class="eyebrow">Independent feedback</div><h2>See what others say.</h2></div><a class="viewall" href="https://uk.trustpilot.com/review/decoinstylevintage.co.uk" target="_blank" rel="noopener">Read Trustpilot →</a></div>
+    <div class="review-grid">
+      <div class="review-card dark-review"><div class="eyebrow">Before you buy</div><h3>Take a closer look at the collection, then explore the stories behind it.</h3><p>Deco In Style Vintage also invites customers to leave feedback through Google and Trustpilot, giving you another place to explore the experience of the shop.</p><div class="review-platforms"><a class="review-platform" href="https://g.page/" target="_blank" rel="noopener">Google reviews ↗</a><a class="review-platform" href="https://uk.trustpilot.com/review/decoinstylevintage.co.uk" target="_blank" rel="noopener">Trustpilot ↗</a></div></div>
+      <div class="review-card"><div class="eyebrow">Always worth another look</div><h3>New finds. Different stories.</h3><p>The selection changes, so the shop stays discoverable whether you are looking for a particular era or simply waiting for the right object to appear.</p><a class="btn dark" href="https://decoinstylevintage.co.uk/ols/products">Shop latest finds →</a></div>
+    </div>
+  </div>
+</section>
+
+<section class="instagram" id="instagram">
+  <div class="wrap"><div class="ig-head"><div><div class="eyebrow">Visual diary</div><h2>From the collection.</h2></div><a class="viewall" href="https://www.instagram.com/" target="_blank" rel="noopener">Follow on Instagram →</a></div>
+    <div class="ig-grid">
+      <a class="ig" href="https://www.instagram.com/" target="_blank" rel="noopener"><img src="https://img1.wsimg.com/isteam/ip/63e884dd-c920-42e4-aa42-12922a3278a0/Bagley3169TulipPosyBowlLgGreen.jpg/:/rs=w:1000,h:1200" alt="Vintage green glass"><span class="ig-label">@decoinstylevintage</span></a>
+      <a class="ig" href="https://www.instagram.com/" target="_blank" rel="noopener"><img src="https://img1.wsimg.com/isteam/ip/63e884dd-c920-42e4-aa42-12922a3278a0/20240304_111908.jpg/:/rs=w:900,h:900" alt="Vintage glass"></a>
+      <a class="ig" href="https://www.instagram.com/" target="_blank" rel="noopener"><img src="https://img1.wsimg.com/isteam/ip/63e884dd-c920-42e4-aa42-12922a3278a0/20240207_105943_001-b9890f5.jpg/:/rs=w:900,h:900" alt="Vintage decorative pieces"></a>
+      <a class="ig" href="https://www.instagram.com/" target="_blank" rel="noopener"><img src="https://img1.wsimg.com/isteam/ip/63e884dd-c920-42e4-aa42-12922a3278a0/20230918_113438.jpg/:/rs=w:1000,h:1200" alt="Vintage dressing table set"></a>
+    </div>
+  </div>
+</section>
+
+<section class="final-cta"><div class="wrap final-inner"><div><div class="eyebrow">Your next find</div><h2>Find something with a little history.</h2></div><a class="btn" href="https://decoinstylevintage.co.uk/ols/products">Shop vintage finds →</a></div></section>
+</main>
+
+<footer>
+  <div class="wrap footer-grid">
+    <div><div class="footer-logo">DECO IN STYLE</div><div class="footer-desc">Vintage glass, ceramics and decorative treasures, thoughtfully gathered from Somerset and beyond.</div></div>
+    <div><h4>Shop</h4><a href="#shop">Latest finds</a><a href="#eras">Collections</a><a href="https://decoinstylevintage.co.uk/ols/products">All pieces</a></div>
+    <div><h4>Discover</h4><a href="https://decoinstylevintage.co.uk/glossary">Glossary</a><a href="#journal">Journal</a><a href="https://decoinstylevintage.co.uk/">About</a></div>
+    <div><h4>Connect</h4><a href="https://uk.trustpilot.com/review/decoinstylevintage.co.uk">Reviews</a><a href="https://www.instagram.com/" target="_blank" rel="noopener">Instagram</a><a href="https://decoinstylevintage.co.uk/">Contact</a></div>
+  </div>
+  <div class="wrap bottom"><div>© Deco In Style Vintage</div><div>Vintage · Art Deco · Somerset</div></div>
+</footer>
+
+<script>
+(function(){
+  const slides=[...document.querySelectorAll('.hero-slide')];
+  const dots=[...document.querySelectorAll('.hero-dots button')];
+  let index=0, timer;
+  function go(n){
+    index=(n+slides.length)%slides.length;
+    slides.forEach((s,i)=>{s.classList.remove('active');if(i===index){void s.offsetWidth;s.classList.add('active')}});
+    dots.forEach((d,i)=>d.classList.toggle('active',i===index));
+  }
+  function restart(){clearInterval(timer);timer=setInterval(()=>go(index+1),5200)}
+  go(0);restart();
+  document.getElementById('heroPrev').onclick=()=>{go(index-1);restart()};
+  document.getElementById('heroNext').onclick=()=>{go(index+1);restart()};
+  dots.forEach(d=>d.onclick=()=>{go(+d.dataset.slide);restart()});
+  const media=document.getElementById('heroMedia');
+  media.addEventListener('mouseenter',()=>clearInterval(timer)); media.addEventListener('mouseleave',restart);
+
+  document.querySelectorAll('[data-scroll]').forEach(button=>button.addEventListener('click',()=>{
+    const target=document.getElementById(button.dataset.scroll);
+    target.scrollBy({left:+button.dataset.dir*(target.clientWidth*.82),behavior:'smooth'});
+  }));
+
+  document.querySelectorAll('.product-slider,.journal-slider').forEach(el=>{
+    let down=false,start=0,left=0;
+    el.addEventListener('pointerdown',e=>{down=true;start=e.clientX;left=el.scrollLeft;el.setPointerCapture(e.pointerId);el.style.cursor='grabbing'});
+    el.addEventListener('pointermove',e=>{if(down)el.scrollLeft=left-(e.clientX-start)});
+    const end=()=>{down=false;el.style.cursor='grab'};
+    el.addEventListener('pointerup',end);el.addEventListener('pointercancel',end);el.addEventListener('pointerleave',()=>{if(down)end()});
+  });
+
+  document.querySelectorAll('img').forEach(img=>img.addEventListener('error',function(){this.classList.add('media-fallback');this.style.opacity='.15'}));
+
+  // simple mobile navigation
+  const menu=document.querySelector('.menu-btn');
+  const mobile=document.querySelector('.mobile-nav');
+  if(menu&&mobile){
+    menu.addEventListener('click',()=>mobile.classList.toggle('show'));
+    mobile.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>mobile.classList.remove('show')));
+  }
+})();
+</script>
+</body>
+</html>
